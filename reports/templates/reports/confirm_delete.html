@@ -1,0 +1,18 @@
+{% extends 'reports/base.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">⚠ Confirm Deletion</h2>
+    
+    <div class="alert alert-danger text-center mt-4">
+        <p>Are you sure you want to delete "<strong>{{ object }}</strong>"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">🗑 Delete</button>
+            <a href="{% url 'exam_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

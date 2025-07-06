@@ -1,0 +1,50 @@
+{% extends 'reports/base.html' %}
+
+{% block title %}Exam Report{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-3">Exam Report</h2>
+
+    <form method="post" class="mb-4 p-4 border rounded shadow">
+        {% csrf_token %}
+        <h4>Add Exam Record</h4>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <label for="exam_filter">Filter by Exam Type:</label>
+        <select name="exam_filter" class="form-control" required>
+            <option value="">Select Exam Type</option>
+            <option value="Test">Test</option>
+            <option value="Semester">Semester</option>
+        </select>
+        <button type="submit" name="filter_exam" class="btn btn-primary mt-2">Filter</button>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Reg No</th>
+                <th>Subject</th>
+                <th>Exam Type</th>
+                <th>Date</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in exam_records %}
+            <tr>
+                <td>{{ record.reg_no.reg_no }}</td>
+                <td>{{ record.subject }}</td>
+                <td>{{ record.exam_type }}</td>
+                <td>{{ record.date }}</td>
+                <td>{{ record.marks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

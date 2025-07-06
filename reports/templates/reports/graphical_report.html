@@ -1,0 +1,68 @@
+{% extends 'reports/base.html' %}
+
+{% block title %}Graphical Reports{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Graphical Reports</h2>
+
+    <canvas id="attendanceChart"></canvas>
+    <canvas id="marksChart" class="mt-5"></canvas>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Safely parse JSON data from Django template variables
+        let studentNames = JSON.parse('{{ student_names|safe }}');
+        let attendance = JSON.parse('{{ attendance|safe }}');
+        let marks = JSON.parse('{{ marks|safe }}');
+
+        // Attendance Chart
+        new Chart(document.getElementById('attendanceChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: studentNames,
+                datasets: [{
+                    label: 'Attendance (%)',
+                    data: attendance,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Marks Chart
+        new Chart(document.getElementById('marksChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: studentNames,
+                datasets: [{
+                    label: 'Total Marks',
+                    data: marks,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

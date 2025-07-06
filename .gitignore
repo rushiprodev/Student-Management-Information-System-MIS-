@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# SQLite database file
+db.sqlite3
+
+# Django migrations
+*/migrations/
+!*/migrations/__init__.py
+
+# Environment variables and secrets
+.env
+
+# VS Code settings
+.vscode/
+
+
+
+# Virtual environment
+venv/
+env/

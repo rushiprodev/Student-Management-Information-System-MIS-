@@ -1,0 +1,41 @@
+{% extends 'reports/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card p-4 shadow-lg" style="width: 400px; border-radius: 10px;">
+        <h2 class="text-center mb-4 text-primary"><i class="fas fa-sign-in-alt"></i> Login</h2>
+
+        <!-- Display errors -->
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label"><i class="fas fa-user"></i> Username</label>
+                <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <p class="mt-3 text-center">
+            Don't have an account? <a href="{% url 'register' %}" class="text-primary">Register</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

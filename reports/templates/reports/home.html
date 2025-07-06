@@ -1,0 +1,22 @@
+{% extends 'reports/base.html' %}
+
+{% block title %}Home - Student Report{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Welcome, {{ user.username }}</h2>
+            <p>Manage student reports efficiently.</p>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="{% url 'student_list' %}" class="btn btn-primary w-100">View Students</a></li>
+                <li class="list-group-item"><a href="{% url 'attendance_report' %}" class="btn btn-warning w-100">Attendance Report</a></li>
+                <li class="list-group-item"><a href="{% url 'topper_report' %}" class="btn btn-success w-100">Topper Report</a></li>
+                <li class="list-group-item"><a href="{% url 'defaulter_report' %}" class="btn btn-danger w-100">Defaulter Report</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
